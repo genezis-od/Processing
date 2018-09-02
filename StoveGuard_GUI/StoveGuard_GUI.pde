@@ -18,7 +18,7 @@ int[]   rxbuf = new int[buffer_size];          // Массив-буфер для
 int     n=1;                         // Позиция в буфере
 boolean recive=false;                // Статус приема
 PFont   font;
-int     blx = 12;                    // началопо Х
+int     blx = 48;                    // началопо Х
 color   col = color(170,170,180);    // Основной цвет контура и заливки
 
 void setup()
@@ -51,33 +51,33 @@ void draw()
   
   text("StoveGuard GUI",478,28);                   
    
-  DrawCharts();
-  DrawBarGraphs();
-  DrawFlags();
+  DrawCharts(blx, 74);  
+  DrawBarGraphs(blx, 396);
+  DrawFlags(blx, 482);
 }
  
-void DrawBarGraphs ()
+void DrawBarGraphs (int pos_x, int pos_y)
 {
   // А тут нарисуем некий барграф, соответствующий значению принятого байта, чтоб место не пропадало
   
   fill(10);                                       // Устанавливаем фон
   stroke(200);                                    // Цвет контура
-  rect(12, 180, 255, 50);                         // Рисуем контур барграфа
+  rect(pos_x, pos_y, 255, 50);                         // Рисуем контур барграфа
   fill(255);                                      // Устанавливаем цвет барграфа
-  rect(12, 180, rxbuf[1], 50);                       // Рисуем барграф
+  rect(pos_x, pos_y, rxbuf[1], 50);                       // Рисуем барграф
   
 }
 
-void DrawFlags ()
+void DrawFlags (int pos_x, int pos_y)
 {
-  text("PORTA",blx,20);
-  pickrect(rxbuf[1],blx,45);                       // Блок отрисовки состояний порта 
+  text("PORTA",pos_x,pos_y);
+  pickrect(rxbuf[1],blx,(pos_y+25));                       // Блок отрисовки состояний порта 
   
-  text("PORTB",blx,104);
-  pickrect(rxbuf[2],blx,128);                      // Блок отрисовки состояний порта 
+  text("PORTB",pos_x,(pos_y+84));
+  pickrect(rxbuf[2],blx,(pos_y+108));                      // Блок отрисовки состояний порта 
   
-  text("PORTC",blx,196);
-  pickrect(rxbuf[3],blx,220);                      // Блок отрисовки состояний порта 
+  text("PORTC",pos_x,(pos_y+176));
+  pickrect(rxbuf[3],blx,(pos_y+200));                      // Блок отрисовки состояний порта 
   
 }
 
@@ -109,7 +109,7 @@ void pickrect(int bits, int blx, int bly)
   }
 }
 
-void DrawCharts ()
+void DrawCharts (int pos_x, int pos_y)
 {
   //background(200);
   // unshift: add data from left to right (first in)
